@@ -16,6 +16,7 @@ body {
   overflow-x: hidden;
 }
 
+/* Main card */
 .card {
   background: white;
   padding: 35px;
@@ -24,6 +25,11 @@ body {
   box-shadow: 0 15px 40px rgba(0,0,0,0.25);
   max-width: 320px;
   z-index: 2;
+  transition: transform 0.6s ease;
+}
+
+.card.move-up {
+  transform: translateY(-140px);
 }
 
 #cuteText {
@@ -60,7 +66,7 @@ button {
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 5;
+  z-index: 6;
 }
 
 .popup-content {
@@ -76,21 +82,21 @@ button {
   to { transform: scale(1); }
 }
 
-/* Gallery */
+/* Slideshow (NOW ON TOP) */
 .gallery {
   position: fixed;
-  bottom: 25px;
+  bottom: 30px;
   width: 100%;
   text-align: center;
   display: none;
-  z-index: 3;
+  z-index: 5;
 }
 
 .gallery img {
-  width: 260px;
-  max-width: 80%;
+  width: 280px;
+  max-width: 85%;
   border-radius: 18px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.35);
   transition: opacity 0.8s ease-in-out;
 }
 
@@ -112,7 +118,7 @@ button {
 
 <body>
 
-<div class="card">
+<div class="card" id="card">
   <h1>Zainy 💕</h1>
   <p id="cuteText">Will you be mine forever? 🥺</p>
   <button id="yes">Yes 💖</button>
@@ -138,6 +144,7 @@ const popup = document.getElementById("popup");
 const cuteText = document.getElementById("cuteText");
 const gallery = document.getElementById("gallery");
 const slide = document.getElementById("slide");
+const card = document.getElementById("card");
 
 let scale = 1;
 
@@ -188,6 +195,7 @@ function startSlideshow() {
 
 yesBtn.addEventListener("click", () => {
   popup.style.display = "flex";
+  card.classList.add("move-up");
   startSlideshow();
   launchConfetti();
 });

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Zainy 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 35px;
+      border-radius: 22px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      max-width: 320px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    #cuteText {
+      font-size: 18px;
+      margin-bottom: 20px;
+      transition: 0.3s;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #no {
+      background: #ccc;
+      position: absolute;
+    }
+
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); }
+      100% { transform: scale(1); }
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      animation: fall 3s linear infinite;
+      z-index: 20;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10px); }
+      100% { transform: translateY(110vh); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Music -->
+  <audio id="music" loop>
+    <source src="tum-se-hi.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card">
+    <h1>Zainy 💕</h1>
+    <p id="cuteText">Will you be mine forever? 🥺</p>
+    <button id="yes">Yes 💖</button>
+  </div>
+
+  <button id="no">No 🙈</button>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h1>YAYYYYY 🎉💖</h1>
+      <p>Zainy & Abbas forever ♾️</p>
+    </div>
+  </div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const popup = document.getElementById("popup");
+  const cuteText = document.getElementById("cuteText");
+  const music = document.getElementById("music");
+
+  let scale = 1;
+
+  const cuteLines = [
+    "Aww don’t do this 🥺",
+    "Itna bhi kya bhaav 😭",
+    "Dil toot jayega 💔",
+    "Zainy pleaseee 🥹",
+    "Okay now you’re just teasing 😜",
+    "Bas kar yaar 😩❤️"
+  ];
+
+  noBtn.style.top = "60%";
+  noBtn.style.left = "45%";
+
+  noBtn.addEventListener("mouseenter", () => {
+    // Change text
+    cuteText.textContent = cuteLines[Math.floor(Math.random() * cuteLines.length)];
+
+    // Shrink button
+    scale -= 0.08;
+    if (scale < 0.3) scale = 0.3;
+    noBtn.style.transform = `scale(${scale})`;
+
+    // Move button
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    // Start music on first interaction
+    music.play().catch(() => {});
+  });
+
+  yesBtn.addEventListener("click", () => {
+    popup.style.display = "flex";
+    music.play().catch(() => {});
+    launchConfetti();
+  });
+
+  function launchConfetti() {
+    for (let i = 0; i < 120; i++) {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.background = `hsl(${Math.random()*360},100%,50%)`;
+      confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+      document.body.appendChild(confetti);
+
+      setTimeout(() => confetti.remove(), 3000);
+    }
+  }
+</script>
+
+</body>
+</html>
